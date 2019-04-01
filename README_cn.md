@@ -8,9 +8,9 @@
 - [English](https://github.com/wzshiming/password/blob/master/README.md)
 - [简体中文](https://github.com/wzshiming/password/blob/master/README_cn.md)
 
-This library produces random, irreversible Hash storage passwords
-Can only be used to verify that the password is correct
+这个库可以生产随机不可逆的 Hash值 储存密码
+只能用于验证密码是否正确
 
-## License
+## 许可证
 
-Pouch is licensed under the MIT License. See [LICENSE](https://github.com/wzshiming/password/blob/master/LICENSE) for the full license text.
+软包根据MIT License。有关完整的许可证文本，请参阅[LICENSE](https://github.com/wzshiming/password/blob/master/LICENSE)。
