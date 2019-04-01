@@ -2,17 +2,18 @@ package password
 
 import (
 	"bytes"
-	"encoding/base64"
 	"hash"
 	"io"
 )
 
 // Password Lossy encryption used to store and verify passwords
 type Password struct {
-	NewHash    func() hash.Hash
-	RandReader io.Reader
-	HashSize   int
-	RandSize   int
+	NewHash        func() hash.Hash
+	RandReader     io.Reader
+	HashSize       int
+	RandSize       int
+	EncodeToString func([]byte) string
+	DecodeString   func(string) ([]byte, error)
 }
 
 // Encrypt encryption adds random variables to make each encryption different
@@ -23,12 +24,12 @@ func (p *Password) Encrypt(word string) (code string) {
 	hashSum.Write([]byte(word))
 	hashSum.Write(sum[:p.RandSize])
 	sum = hashSum.Sum(sum[:p.RandSize])
-	return base64.RawURLEncoding.EncodeToString(sum)
+	return p.EncodeToString(sum)
 }
 
 // Verify password
 func (p *Password) Verify(word, code string) bool {
-	sum, err := base64.RawURLEncoding.DecodeString(code)
+	sum, err := p.DecodeString(code)
 	if err != nil {
 		return false
 	}
